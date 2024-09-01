@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-# Проверь переход по клику на «Личный кабинет»
+# Проверь переход по клику на «Конструктор» и на логотип Stellar Burgers
 driver = webdriver.Chrome()
 driver.get("https://stellarburgers.nomoreparties.site/login")
 
