@@ -47,8 +47,7 @@ Thumbs.db
 # Конфигурационные файлы
 *.ini
 *.cfg
-*.conf 
-eee
+*.conf
 
 # Файлы браузеров
 .cache/
