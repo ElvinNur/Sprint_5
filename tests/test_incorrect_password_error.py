@@ -20,6 +20,6 @@ driver.find_element(By.XPATH, "(//input[@class='text input__textfield text_type_
 driver.find_element(By.XPATH, "(//input[@class='text input__textfield text_type_main-default'])[3]").send_keys("1") # Пароль
 driver.find_element(By.XPATH, "//button[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']").click()
 
-WebDriverWait(driver,5).until(expected_conditions.visibility_of_element_located((By.XPATH, "//p[@class='input__error text_type_main-default']"))) # проверка на налие кнопки "Войти"
+WebDriverWait(driver,5).until(expected_conditions.visibility_of_element_located((By.XPATH, "//p[@class='input__error text_type_main-default']"))) # проверка на наличие текста "Некорректный пароль"
 
 driver.quit()
