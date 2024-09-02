@@ -1,20 +1,23 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from locators import LOGIN_EMAIL_INPUT, LOGIN_PASSWORD_INPUT, LOGIN_BUTTON, PERSONAL_ACCOUNT_BUTTON, CONSTRUCTOR_BUTTON, BURGER_HEADER, LOGO_BUTTON
 
-# Проверь переход по клику на «Конструктор» и на логотип Stellar Burgers
-driver = webdriver.Chrome()
-driver.get("https://stellarburgers.nomoreparties.site/login")
+def test_constructor_and_logo_navigation(driver):
+    driver.get("https://stellarburgers.nomoreparties.site/login")
 
-driver.find_element(By.XPATH, "//input[@class='text input__textfield text_type_main-default']").send_keys("elvinnurmamedov13@ya.ru")
-driver.find_element(By.XPATH, "//input[@class='text input__textfield text_type_main-default' and @name='Пароль']").send_keys("qwertyu")
-driver.find_element(By.XPATH, "//button[text()='Войти']").click()
-driver.find_element(By.XPATH, "(//p[@class='AppHeader_header__linkText__3q_va ml-2'])[3]").click()  # клик по кнопке "Личный кабинет"
-driver.find_element(By.XPATH, "//p[text()='Конструктор']").click() # клик по кнопке "Конструктор"
-WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//h1[text()='Соберите бургер']"))) # проверка на наличие текста "Соберите бургер"
-driver.find_element(By.XPATH, "(//p[@class='AppHeader_header__linkText__3q_va ml-2'])[3]").click() # клик по кнопке "Личный кабинет"
-driver.find_element(By.CSS_SELECTOR, "#root > div > header > nav > div > a > svg").click() # клик по лого
-WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//h1[text()='Соберите бургер']")))
-driver.quit()
-# fortest
+    # Вводим данные для входа
+    driver.find_element(*LOGIN_EMAIL_INPUT).send_keys("elvinnurmamedov13@ya.ru")
+    driver.find_element(*LOGIN_PASSWORD_INPUT).send_keys("qwertyu")
+    driver.find_element(*LOGIN_BUTTON).click()
+
+    # Переход в личный кабинет
+    driver.find_element(*PERSONAL_ACCOUNT_BUTTON).click()
+
+    # Переход в Конструктор
+    driver.find_element(*CONSTRUCTOR_BUTTON).click()
+    WebDriverWait(driver, 5).until(EC.visibility_of_element_located(BURGER_HEADER))
+
+    # Переход обратно в личный кабинет и клик на логотип
+    driver.find_element(*PERSONAL_ACCOUNT_BUTTON).click()
+    driver.find_element(*LOGO_BUTTON).click()
+    WebDriverWait(driver, 5).until(EC.visibility_of_element_located(BURGER_HEADER))

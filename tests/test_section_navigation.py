@@ -1,20 +1,20 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
-# Проверь, что работают переходы к разделам:
-driver = webdriver.Chrome()
-driver.get("https://stellarburgers.nomoreparties.site")
+from locators import FILLINGS_TAB, SAUCES_TAB, BUNS_TAB, FILLINGS_HEADER, SAUCES_HEADER, BUNS_HEADER
 
 
-driver.find_element(By.XPATH, "//span[text()='Начинки']").click() # Клик "Начинки"
-WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//h2[text()='Начинки']"))) # проверка на наличие текста "Начинки"
 
-driver.find_element(By.XPATH, "//span[text()='Соусы']").click() # Клик "Соусы"
-WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//h2[text()='Соусы']"))) # проверка на наличие текста "Соусы"
+def test_section_navigation(driver):
+    driver.get("https://stellarburgers.nomoreparties.site")
 
-driver.find_element(By.XPATH, "//span[text()='Булки']").click() # Клик "Булки"
-WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//h2[text()='Булки']"))) # проверка на наличие текста "Булки"
-driver.quit()
-# fortest
+    # Клик "Начинки" и проверка заголовка
+    driver.find_element(*FILLINGS_TAB).click()
+    WebDriverWait(driver, 5).until(EC.visibility_of_element_located(FILLINGS_HEADER))
+
+    # Клик "Соусы" и проверка заголовка
+    driver.find_element(*SAUCES_TAB).click()
+    WebDriverWait(driver, 5).until(EC.visibility_of_element_located(SAUCES_HEADER))
+
+    # Клик "Булки" и проверка заголовка
+    driver.find_element(*BUNS_TAB).click()
+    WebDriverWait(driver, 5).until(EC.visibility_of_element_located(BUNS_HEADER))

@@ -1,19 +1,22 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
+import random
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from locators import LOGIN_EMAIL_INPUT, LOGIN_PASSWORD_INPUT, LOGIN_BUTTON, PERSONAL_ACCOUNT_BUTTON, LOGOUT_BUTTON, LOGIN_PAGE_HEADER
 
-driver = webdriver.Chrome()
-driver.get("https://stellarburgers.nomoreparties.site/login")
+def test_login_and_logout(driver):
+    driver.get("https://stellarburgers.nomoreparties.site/login")
 
-driver.find_element(By.XPATH, "//input[@class='text input__textfield text_type_main-default']").send_keys("elvinnurmamedov13@ya.ru")
-driver.find_element(By.XPATH, "//input[@class='text input__textfield text_type_main-default' and @name='Пароль']").send_keys("qwertyu")
-driver.find_element(By.XPATH, "//button[text()='Войти']").click()
-driver.find_element(By.XPATH, "(//p[@class='AppHeader_header__linkText__3q_va ml-2'])[3]").click() # клик по кнопке "Личный кабинет"
+    # Вводим данные для входа
+    driver.find_element(*LOGIN_EMAIL_INPUT).send_keys("elvinnurmamedov13@ya.ru")
+    driver.find_element(*LOGIN_PASSWORD_INPUT).send_keys("qwertyu")
+    driver.find_element(*LOGIN_BUTTON).click()
 
-logout_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='root']/div/main/div/nav/ul/li[3]/button")))
-logout_button.click() # клик по кнопке "Выход"
+    # Переход в личный кабинет
+    driver.find_element(*PERSONAL_ACCOUNT_BUTTON).click()
 
-WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#root > div > main > div > h2"))) # проверка на наличие текста "Вход"
-driver.quit()
-# fortest
+    # Ожидание и клик по кнопке "Выход"
+    logout_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(LOGOUT_BUTTON))
+    logout_button.click()
+
+    # Проверка на наличие текста "Вход"
+    WebDriverWait(driver, 5).until(EC.visibility_of_element_located(LOGIN_PAGE_HEADER))

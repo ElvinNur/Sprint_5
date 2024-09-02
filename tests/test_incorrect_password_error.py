@@ -1,26 +1,23 @@
 import random
-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from locators import REGISTER_NAME_INPUT, REGISTER_EMAIL_INPUT, REGISTER_PASSWORD_INPUT, REGISTER_BUTTON, PASSWORD_ERROR_MESSAGE
 
-driver = webdriver.Chrome()
-driver.get("https://stellarburgers.nomoreparties.site/register")
 
-# Генерация трех случайных цифр
-random_digits = random.randint(100, 999)
+def test_registration_with_invalid_password(driver):
+    driver.get("https://stellarburgers.nomoreparties.site/register")
 
-# Форматирование логина
-login = f"elvinnurmamedov13{random_digits}@ya.ru"
+    # Генерация трех случайных цифр
+    random_digits = random.randint(100, 999)
 
-# Выполняем регистрацию
-driver.find_element(By.XPATH, "(//input[@class='text input__textfield text_type_main-default'])[1]").send_keys("Elvin") # Имя
-driver.find_element(By.XPATH, "(//input[@class='text input__textfield text_type_main-default'])[2]").send_keys(login) # Логин
-driver.find_element(By.XPATH, "(//input[@class='text input__textfield text_type_main-default'])[3]").send_keys("1") # Пароль
-driver.find_element(By.XPATH, "//button[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']").click()
+    # Форматирование логина
+    login = f"elvinnurmamedov13{random_digits}@ya.ru"
 
-WebDriverWait(driver,5).until(expected_conditions.visibility_of_element_located((By.XPATH, "//p[@class='input__error text_type_main-default']"))) # проверка на наличие текста "Некорректный пароль"
+    # Выполняем регистрацию
+    driver.find_element(*REGISTER_NAME_INPUT).send_keys("Elvin")
+    driver.find_element(*REGISTER_EMAIL_INPUT).send_keys(login)
+    driver.find_element(*REGISTER_PASSWORD_INPUT).send_keys("1")
+    driver.find_element(*REGISTER_BUTTON).click()
 
-driver.quit()
-# fortest
+    # Проверка на наличие текста "Некорректный пароль"
+    WebDriverWait(driver, 5).until(EC.visibility_of_element_located(PASSWORD_ERROR_MESSAGE))
