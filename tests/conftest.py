@@ -19,3 +19,5 @@ def login(driver):
         driver.find_element(By.XPATH, "//button[text()='Войти']").click()
         WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//button[text()='Оформить заказ']")))
     return _login
+
+# fortest

@@ -17,3 +17,4 @@ driver.find_element(By.XPATH, "(//p[@class='AppHeader_header__linkText__3q_va ml
 driver.find_element(By.CSS_SELECTOR, "#root > div > header > nav > div > a > svg").click() # клик по лого
 WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//h1[text()='Соберите бургер']")))
 driver.quit()
+# fortest

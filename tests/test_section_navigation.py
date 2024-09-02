@@ -17,3 +17,4 @@ WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//h2
 driver.find_element(By.XPATH, "//span[text()='Булки']").click() # Клик "Булки"
 WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//h2[text()='Булки']"))) # проверка на наличие текста "Булки"
 driver.quit()
+# fortest

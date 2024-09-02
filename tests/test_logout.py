@@ -16,3 +16,4 @@ logout_button.click() # клик по кнопке "Выход"
 
 WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#root > div > main > div > h2"))) # проверка на наличие текста "Вход"
 driver.quit()
+# fortest

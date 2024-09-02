@@ -25,4 +25,5 @@ def test_login_forgot_password(driver, login):
     driver.find_element(By.XPATH, "//a[@class='Auth_link__1fOlj']").click()  # клик по гиперссылке "Войти"
     login()  # Выполнение авторизации
 
+# fortest
 

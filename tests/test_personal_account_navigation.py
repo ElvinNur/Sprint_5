@@ -13,3 +13,4 @@ driver.find_element(By.XPATH, "//button[text()='Войти']").click()
 driver.find_element(By.XPATH, "(//p[@class='AppHeader_header__linkText__3q_va ml-2'])[3]").click()  # клик по кнопке "Личный кабинет"
 WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//p[@class='Account_text__fZAIn text text_type_main-default']"))) # проверка на наличие текста "В этом разделе вы можете изменить свои персональные данные"
 driver.quit()
+# fortest

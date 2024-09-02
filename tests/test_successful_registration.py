@@ -23,3 +23,4 @@ driver.find_element(By.XPATH, "//button[@class='button_button__33qZ0 button_butt
 WebDriverWait(driver,5).until(expected_conditions.visibility_of_element_located((By.XPATH, "//button[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']"))) # проверка на налие кнопки "Войти"
 
 driver.quit()
+# fortest
