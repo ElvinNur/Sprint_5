@@ -1,7 +1,7 @@
 import random
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from locators import LOGIN_EMAIL_INPUT, LOGIN_PASSWORD_INPUT, LOGIN_BUTTON, PERSONAL_ACCOUNT_BUTTON, LOGOUT_BUTTON, LOGIN_PAGE_HEADER
+from locators import *
 
 def test_login_and_logout(driver):
     driver.get("https://stellarburgers.nomoreparties.site/login")
@@ -19,4 +19,8 @@ def test_login_and_logout(driver):
     logout_button.click()
 
     # Проверка на наличие текста "Вход"
-    WebDriverWait(driver, 5).until(EC.visibility_of_element_located(LOGIN_PAGE_HEADER))
+    login_header_element = WebDriverWait(driver, 5).until(EC.visibility_of_element_located(LOGIN_PAGE_HEADER))
+    login_header_text = login_header_element.text
+
+    # Используем assert для проверки текста заголовка
+    assert login_header_text == "Вход", f"Expected header to be 'Вход' but got '{login_header_text}'"

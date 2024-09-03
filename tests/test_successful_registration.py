@@ -1,7 +1,7 @@
 import random
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from locators import REGISTER_NAME_INPUT, REGISTER_EMAIL_INPUT, REGISTER_PASSWORD_INPUT, REGISTER_BUTTON, LOGIN_BUTTON_ON_REGISTER_PAGE
+from locators import *
 
 def test_registration_with_random_email(driver):
     driver.get("https://stellarburgers.nomoreparties.site/register")
@@ -19,4 +19,5 @@ def test_registration_with_random_email(driver):
     driver.find_element(*REGISTER_BUTTON).click()
 
     # Проверка на наличие кнопки "Войти"
-    WebDriverWait(driver, 5).until(EC.visibility_of_element_located(LOGIN_BUTTON_ON_REGISTER_PAGE))
+    login_button_element = WebDriverWait(driver, 5).until(EC.visibility_of_element_located(LOGIN_BUTTON_ON_REGISTER_PAGE))
+    assert login_button_element.is_displayed(), "Login button is not displayed on the registration page"

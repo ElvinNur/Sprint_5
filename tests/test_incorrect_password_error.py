@@ -1,7 +1,7 @@
 import random
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from locators import REGISTER_NAME_INPUT, REGISTER_EMAIL_INPUT, REGISTER_PASSWORD_INPUT, REGISTER_BUTTON, PASSWORD_ERROR_MESSAGE
+from locators import *
 
 
 def test_registration_with_invalid_password(driver):
@@ -20,4 +20,8 @@ def test_registration_with_invalid_password(driver):
     driver.find_element(*REGISTER_BUTTON).click()
 
     # Проверка на наличие текста "Некорректный пароль"
-    WebDriverWait(driver, 5).until(EC.visibility_of_element_located(PASSWORD_ERROR_MESSAGE))
+    error_message_element = WebDriverWait(driver, 3).until(EC.visibility_of_element_located(PASSWORD_ERROR_MESSAGE))
+    error_message_text = error_message_element.text
+
+    # Используем assert для проверки текста ошибки
+    assert error_message_text == "Некорректный пароль", f"Expected error message to be 'Некорректный пароль' but got '{error_message_text}'"

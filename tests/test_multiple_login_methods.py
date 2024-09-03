@@ -1,7 +1,7 @@
 import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from locators import MAIN_PAGE_LOGIN_BUTTON, PERSONAL_ACCOUNT_BUTTON, REGISTRATION_PAGE_LOGIN_LINK, FORGOT_PASSWORD_PAGE_LOGIN_LINK
+from locators import *
 
 def test_login_main_page(driver, login):
     driver.get("https://stellarburgers.nomoreparties.site")
